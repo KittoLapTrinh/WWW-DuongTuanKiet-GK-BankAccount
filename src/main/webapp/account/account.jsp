@@ -13,6 +13,19 @@
 </head>
 <body>
     <h1>List Account</h1>
+
+    <h2>Filter Accounts by Amount</h2>
+    <form action="page" method="post">
+        <input type="hidden" name="action" value="filterAmount">
+        <label for="minAmount">Minimum Amount: </label>
+        <input type="number" id="minAmount" name="minAmount" required><br><br>
+
+        <label for="maxAmount">Maximum Amount: </label>
+        <input type="number" id="maxAmount" name="maxAmount" required><br><br>
+
+        <button type="submit">Filter</button>
+    </form>
+
     <table border="1">
         <thead>
             <tr>

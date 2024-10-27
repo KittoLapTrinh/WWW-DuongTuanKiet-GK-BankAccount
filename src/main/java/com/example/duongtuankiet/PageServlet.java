@@ -72,10 +72,29 @@ public class PageServlet extends HttpServlet {
                 case "account":
                     handleInsertCandidate(req, resp);
                     break;
+                case "filterAmount":
+                    handleFilterAmount(req, resp);
             }
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    private void handleFilterAmount(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        // Lấy tham số từ yêu cầu
+        double minAmount = Double.parseDouble(req.getParameter("minAmount"));
+        double maxAmount = Double.parseDouble(req.getParameter("maxAmount"));
+
+        // Sử dụng AccountService để lọc tài khoản theo amount
+        AccountService service = new AccountServiceImpl();
+        List<Account> accounts = service.filterAmount(minAmount, maxAmount);
+
+        // Lưu danh sách tài khoản vào thuộc tính yêu cầu
+        req.setAttribute("accounts", accounts);
+
+        // Chuyển hướng đến trang hiển thị tài khoản
+        String page = "/account/account.jsp"; // Đảm bảo trang này có thể hiển thị danh sách tài khoản
+        forwardToPage(page, req, resp);
     }
 
     private void handleInsertCandidate(HttpServletRequest req, HttpServletResponse resp) throws IOException {

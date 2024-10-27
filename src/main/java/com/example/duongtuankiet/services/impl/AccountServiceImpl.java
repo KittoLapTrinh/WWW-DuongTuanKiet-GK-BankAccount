@@ -21,4 +21,9 @@ public class AccountServiceImpl implements AccountService {
     public boolean insert(Account account) {
         return repository.insert(account);
     }
+
+    @Override
+    public List<Account> filterAmount(double minAmount, double maxAmount) {
+        return repository.findAccountsByAmountRange(minAmount, maxAmount);
+    }
 }

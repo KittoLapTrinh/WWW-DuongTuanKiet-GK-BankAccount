@@ -4,6 +4,12 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "bank_account")
+@NamedQueries({
+        @NamedQuery(
+                name = "Account.filterByAmount",
+                query = "SELECT a FROM Account a WHERE a.amount BETWEEN :minAmount AND :maxAmount"
+        )
+})
 public class Account {
     @Id
     @Column(name = "account_number", nullable = false, length = 10)
